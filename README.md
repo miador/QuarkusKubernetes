@@ -1,2 +1,1 @@
-# QuarkusKubernetes
-Reproducing the `RESTEASY` error when deploying Quarkus application on Kubernetes
+Quarkus guide: https://quarkus.io/guides/rest-json

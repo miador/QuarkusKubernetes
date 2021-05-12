@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-json
+  namespace: default
+  labels:
+    app: rest-json
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rest-json
+  template:
+    metadata:
+      labels:
+        app: rest-json
+    spec:
+      containers:
+        - name: rest-json
+          image: quarkus/rest-json-jvm:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-json-http
+  namespace: default
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: http
+  selector:
+    app: rest-json
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rest-json-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    nginx.ingress.kubernetes.io/upstream-vhost: "rest-json-http"
+spec:
+  rules:
+    - host: rest-json-http
+      http:
+        paths:
+          - path: /rest-json
+            pathType: Prefix
+            backend:
+              service:
+                name: rest-json-http
+                port:
+                  number: 8080

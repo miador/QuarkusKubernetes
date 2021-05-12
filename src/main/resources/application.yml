@@ -1,0 +1,5 @@
+quarkus:
+  http:
+    cors:
+      ~: true
+    root-path: /rest-json
