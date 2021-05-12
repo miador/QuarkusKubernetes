@@ -1,1 +1,1 @@
-Quarkus guide: https://quarkus.io/guides/rest-json
+Reproducion of `RESTEASY` error when deploying Quarkus app on Kubernetes with ingress-nginx.
