@@ -48,7 +48,7 @@ metadata:
     nginx.ingress.kubernetes.io/upstream-vhost: "rest-json-http"
 spec:
   rules:
-    - host: rest-json-http
+    - host: localhost
       http:
         paths:
           - path: /rest-json
