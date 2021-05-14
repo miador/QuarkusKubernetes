@@ -44,14 +44,14 @@ metadata:
   name: rest-json-ingress
   namespace: default
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: "/"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$1"
     nginx.ingress.kubernetes.io/upstream-vhost: "rest-json-http"
 spec:
   rules:
     - host: localhost
       http:
         paths:
-          - path: /rest-json
+          - path: /rest-json/(.+)
             pathType: Prefix
             backend:
               service:
